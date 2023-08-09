@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_ENDPOINT = "https://yourapi.com/login"; // replace with your server's endpoint
+const API_ENDPOINT = "http://yourapi.com/login"; // replace with your server's endpoint
 
 export const Auth = {
   async login(email: string, password: string): Promise<unknown> {
