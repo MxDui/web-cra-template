@@ -29,7 +29,6 @@ export const Auth = {
     password: string,
     name: string
   ): Promise<unknown> {
-    // Replace any with your expected return type
     try {
       const response = await axios.post(
         import.meta.env.VITE_API_URL + "/register",
