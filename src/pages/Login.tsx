@@ -1,9 +1,24 @@
+import React, { useState } from "react";
+import { useMutation } from "react-query";
 import { motion } from "framer-motion";
+import { Auth } from "../services/Auth";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const mutation = useMutation((data: { email: string; password: string }) => {
+    return Auth.login(data.email, data.password);
+  });
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    mutation.mutate({ email, password });
+  };
+
   return (
     <div className="h-screen w-full  bg-gray-100">
-      <div className="flex w-full  mx-auto overflow-hidden rounded-lg shadow-xl">
+      <div className="flex w-full  mx-auto overflow-hidden  shadow-xl">
         {/* Branding Part */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -33,13 +48,15 @@ function Login() {
         >
           <div className="w-96">
             <h1 className="text-2xl font-bold mb-4">Login</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label className="block mb-2 text-sm font-medium text-gray-600">
                   Email
                 </label>
                 <input
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full p-2 border rounded-md"
                   placeholder="you@example.com"
                 />
@@ -50,11 +67,14 @@ function Login() {
                 </label>
                 <input
                   type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="w-full p-2 border rounded-md"
                   placeholder="Your Password"
                 />
               </div>
               <motion.button
+                type="submit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="w-full bg-blue-500 text-white p-2 rounded-md"
