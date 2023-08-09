@@ -1,12 +1,15 @@
 import axios from "axios";
 
-const API_ENDPOINT = "http://yourapi.com/login"; // replace with your server's endpoint
-
 export const Auth = {
   async login(email: string, password: string): Promise<unknown> {
-    // Replace any with your expected return type
     try {
-      const response = await axios.post(API_ENDPOINT, { email, password });
+      const response = await axios.post(
+        import.meta.env.VITE_API_URL + "/login",
+        {
+          email,
+          password,
+        }
+      );
       return response.data;
     } catch (error) {
       throw new Error("Failed to authenticate");
@@ -15,7 +18,7 @@ export const Auth = {
 
   async logout(): Promise<void> {
     try {
-      await axios.post(API_ENDPOINT);
+      await axios.post(import.meta.env.VITE_API_URL + "/logout");
     } catch (error) {
       throw new Error("Failed to logout");
     }
@@ -28,11 +31,14 @@ export const Auth = {
   ): Promise<unknown> {
     // Replace any with your expected return type
     try {
-      const response = await axios.post(API_ENDPOINT, {
-        email,
-        password,
-        name,
-      });
+      const response = await axios.post(
+        import.meta.env.VITE_API_URL + "/register",
+        {
+          email,
+          password,
+          name,
+        }
+      );
       return response.data;
     } catch (error) {
       throw new Error("Failed to register");
