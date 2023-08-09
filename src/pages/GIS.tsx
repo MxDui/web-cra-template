@@ -9,19 +9,36 @@ const GIS = () => {
   }, []);
 
   return (
-    <div className="h-screen w-full bg-gradient-to-br from-green-600 to-teal-900 ">
-      <motion.div
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="bg-white rounded-xl shadow-lg p-10 absolute inset-0  m-5"
-      >
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="h-screen w-full  flex"
+    >
+      {/* Sidebar */}
+      <div className="bg-gray-800 w-1/4 p-4 text-white">
+        <h2 className="text-2xl font-bold mb-4">GIS Navigation</h2>
+        <ul>
+          <li className="mb-2 hover:bg-gray-700 px-2 py-1 rounded">
+            Map Overview
+          </li>
+          <li className="mb-2 hover:bg-gray-700 px-2 py-1 rounded">
+            Statistics
+          </li>
+          <li className="mb-2 hover:bg-gray-700 px-2 py-1 rounded">Reports</li>
+          <li className="mb-2 hover:bg-gray-700 px-2 py-1 rounded">Settings</li>
+        </ul>
+      </div>
+
+      {/* GIS Content */}
+      <div className="flex-1 relative bg-white shadow-lg p-10 ">
         <h1 className="text-3xl font-bold mb-4 text-center">
           GIS Visualization
         </h1>
         <p className="text-gray-700 mb-6">
           Explore geographical data interactively.
         </p>
+
         <div className="absolute top-20 bottom-10 left-10 right-10">
           <MapContainer
             center={[51.505, -0.09]}
@@ -37,8 +54,8 @@ const GIS = () => {
             </Marker>
           </MapContainer>
         </div>
-      </motion.div>
-    </div>
+      </div>
+    </motion.div>
   );
 };
 
